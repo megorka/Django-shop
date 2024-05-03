@@ -63,8 +63,6 @@ class UserProfileForm(UserChangeForm):
         'readonly': True
     }))
 
-
-
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email')
