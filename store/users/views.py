@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth, messages
 from django.urls import reverse
 
-from users.models import User
 from products.models import Basket
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm

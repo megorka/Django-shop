@@ -1,6 +1,6 @@
 from django.db import models
 from products.models import Product
-from users.models import AbstractUser
+from users.models import User
 
 
 class Order(models.Model):
@@ -13,7 +13,7 @@ class Order(models.Model):
         return f'Заказ номер: {self.id}'
 
     def total_sum(self):
-        return sum(basket.sum() for basket in AbstractUser)
+        return sum(basket.sum() for basket in User)
 
 
 class OrderItem(models.Model):
