@@ -4,18 +4,21 @@ from users.models import User
 
 
 class Order(models.Model):
+    STATUS_CHOICES = (
+        ('paid', 'Оплачено'),
+        ('delivered', 'Доставлено'),
+        ('in_route', 'В пути')
+    )
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     email = models.EmailField()
     address = models.CharField(max_length=256)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='paid')
 
     def __str__(self):
         return f'Заказ номер: {self.id}'
-
-    def total_sum(self):
-        return sum(basket.sum() for basket in User)
 
 
 class OrderItem(models.Model):

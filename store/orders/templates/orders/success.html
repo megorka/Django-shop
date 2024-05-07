@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +25,7 @@
                                 <h4>
                                     Ваш заказ успешно сформирован.
                                 </h4>
+                                <a class="w-100 btn btn-primary btn-lg" href="{% url 'products:index' %}">Вернуться в магазин</a>
                             </div>
                         </div>
                     </div>

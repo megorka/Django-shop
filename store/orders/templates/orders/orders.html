@@ -7,6 +7,7 @@
             <div class="text-center mt-5">
                 <h1>Заказы</h1>
                 <div class="orders mt-5">
+                {% if orders %}
                     <table class="table">
                         <thead>
                         <tr class="table-light">
@@ -18,33 +19,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Оплачен</td>
-                            <td>21 авг. 21 года</td>
+                        {% for order in orders %}
+                        <tr class="{% if order.status == paid %} {% elif order.status == delivered %} table-success {% elif order.status == in_route %} table-info {% endif %}">
+                            <th scope="row">{{ order.id }}</th>
+                            <td>{{ order.get_status_display }}</td>
+                            <td>{{ order.created }}</td>
                             <td>5 070 руб.</td>
                             <td>
                                 <a href="order.html">просмотреть</a>
                             </td>
                         </tr>
-                        <tr class="table-success">
-                            <th scope="row">2</th>
-                            <td>Досталвен</td>
-                            <td>16 июля 21 года</td>
-                            <td>4 876 руб.</td>
-                            <td>
-                                <a href="order.html">просмотреть</a>
-                            </td>
-                        </tr>
-                        <tr class="table-info">
-                            <th scope="row">3</th>
-                            <td>В пути</td>
-                            <td>14 нояб. 21 года</td>
-                            <td>9 566 руб.</td>
-                            <td>
-                                <a href="order.html">просмотреть</a>
-                            </td>
-                        </tr>
+                        {% endfor %}
+                        {% else %}
+                            <h4>У вас нет заказов.</h4>
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
