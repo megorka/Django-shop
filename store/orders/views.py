@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from products.models import Basket, Product
 from orders.models import OrderItem, Order
 from orders.forms import OrderCreateForm
@@ -46,3 +46,14 @@ def orders(request):
         'orders': order
     }
     return render(request, 'orders/orders.html', context)
+
+@login_required
+def order(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    orders = Order.objects.filter(id=order_id)
+    products = order.items.all()
+    context = {
+        'orders': orders,
+        'products': products
+    }
+    return render(request, 'orders/order.html', context)

@@ -20,6 +20,9 @@ class Order(models.Model):
     def __str__(self):
         return f'Заказ номер: {self.id}'
 
+    def total_price(self):
+        return sum(item.get_price() for item in self.items.all())
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
@@ -29,3 +32,6 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def get_price(self):
+        return self.price * self.quantity

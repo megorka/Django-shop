@@ -1,6 +1,6 @@
-{% extends 'orders/base.html' %}
+{% extends 'products/base.html' %}
 {% load static %}
-
+{% block css %} <link href="{% static '/vendor/css/orders.css' %}" rel="stylesheet"> {% endblock %}
 {% block content %}
     <section>
         <div class="container pt-5">
@@ -20,13 +20,13 @@
                         </thead>
                         <tbody>
                         {% for order in orders %}
-                        <tr class="{% if order.status == paid %} {% elif order.status == delivered %} table-success {% elif order.status == in_route %} table-info {% endif %}">
+                        <tr class="{% if order.status == 'paid' %}{% elif order.status == 'delivered' %}table-success{% elif order.status == 'in_route' %}table-info{% endif %}">
                             <th scope="row">{{ order.id }}</th>
                             <td>{{ order.get_status_display }}</td>
                             <td>{{ order.created }}</td>
-                            <td>5 070 руб.</td>
+                            <td>{{ order.total_price }} руб.</td>
                             <td>
-                                <a href="order.html">просмотреть</a>
+                                <a href="{% url 'orders:order' order.id %}">просмотреть</a>
                             </td>
                         </tr>
                         {% endfor %}
