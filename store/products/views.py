@@ -8,7 +8,7 @@ from users.models import User
 # Create your views here.
 def index(request):
     context = {
-        'title': 'Test Title',
+        'title': 'Магазин у ашотика',
     }
     return render(request, 'products/index.html', context)
 
