@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def order_create(request):
     baskets = Basket.objects.filter(user=request.user)
+    if not baskets.exists():
+        return HttpResponseRedirect(reverse('products:index'))
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -23,7 +25,7 @@ def order_create(request):
                     quantity=basket.quantity
                 )
             baskets.delete()
-            return HttpResponseRedirect(reverse('products:index'))
+            return HttpResponseRedirect(reverse('orders:success'))
     else:
         form = OrderCreateForm()
 
