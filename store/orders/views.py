@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
-from products.models import Basket, Product
+from products.models import Basket
 from orders.models import OrderItem, Order
 from orders.forms import OrderCreateForm
 from django.urls import reverse
@@ -41,7 +41,7 @@ def order_success(request):
 
 @login_required
 def orders(request):
-    order = Order.objects.filter(email=request.user.email)
+    order = Order.objects.filter(user=request.user)
     context = {
         'orders': order
     }
